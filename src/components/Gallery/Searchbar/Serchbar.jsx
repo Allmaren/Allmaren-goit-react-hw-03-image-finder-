@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
-import { SearchForm, ButtonForm, Input } from './SeachBar.styled.js';
+import { SearchForm, Input } from './SeachBar.styled.js';
 
 class SearchBar extends Component {
   state = {
