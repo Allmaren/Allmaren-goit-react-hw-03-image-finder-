@@ -5,7 +5,7 @@ import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 
 import { SearchQuery } from '../elements/services/image-api';
 
-import { Block, TextError } from '../Gallery/Gallery.styled.js';
+import { Block, TextError, ButtonLoadMore } from '../Gallery/Gallery.styled.js';
 import './index.css';
 
 export class Gallery extends Component {
@@ -49,6 +49,9 @@ export class Gallery extends Component {
         )} */}
         {error && <TextError>{error}</TextError>}
         {isLoading && <Loader />}
+        {Boolean(items.length) && (
+          <ButtonLoadMore type="button">Load more</ButtonLoadMore>
+        )}
       </>
     );
   }
