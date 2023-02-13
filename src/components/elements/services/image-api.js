@@ -14,7 +14,7 @@ export const SearchQuery = async (search, page) => {
   const { data } = await instance.get('/', {
     params: {
       q: search,
-      // page: page,
+      page,
     },
   });
   return data;

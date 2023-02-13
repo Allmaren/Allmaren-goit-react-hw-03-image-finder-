@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import Loader from '../elements/Loader/Loader';
 import SearchBar from './Searchbar/Serchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 
+import Modal from 'components/elements/Modal/Modal';
 import { SearchQuery } from '../elements/services/image-api';
 
 import { Block, TextError, ButtonLoadMore } from '../Gallery/Gallery.styled.js';
@@ -14,26 +16,62 @@ export class Gallery extends Component {
     items: [],
     isLoading: false,
     error: null,
+    page: 1,
+    // totalresult: 0,
+    showModal: false,
+    imageDetails: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { search } = this.state;
-    if (prevState.search !== search) {
-      this.setState({ isLoading: true });
-      SearchQuery(search)
-        .then(data => this.setState({ items: [...data.hits] }))
-        .catch(error => this.setState({ error: error.message }))
-        .finally(() => this.setState({ isLoading: false }));
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page !== page) {
+      this.fetchImage();
     }
   }
 
+  async fetchImage() {
+    try {
+      this.setState({ isLoading: true });
+      const { search, page } = this.state;
+      const data = await SearchQuery(search, page);
+      this.setState(({ items }) => ({
+        items: [...items, ...data.hits],
+      }));
+    } catch (error) {
+      this.setState({ error: error.message });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  }
+
+  showImage = (largeImageURL, tags) => {
+    this.setState({
+      showModal: true,
+      imageDetails: {
+        largeImageURL,
+        tags,
+      },
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      imageDetails: null,
+    });
+  };
+
   searchImage = ({ search }) => {
-    this.setState({ search });
+    this.setState({ search, items: [], page: 1 });
+  };
+
+  loadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
   };
 
   render() {
-    const { items, isLoading, error } = this.state;
-    const { searchImage } = this;
+    const { items, isLoading, error, imageDetails, showModal } = this.state;
+    const { searchImage, loadMore, showImage, closeModal } = this;
 
     return (
       <>
@@ -41,7 +79,7 @@ export class Gallery extends Component {
           <SearchBar onSubmit={searchImage} />
         </Block>
 
-        <ImageGalleryItem items={items} />
+        <ImageGallery items={items} showImage={showImage} />
         {/* {!items.length && (
           <TextError>
             Image not found. Please change the query and try again
@@ -50,7 +88,14 @@ export class Gallery extends Component {
         {error && <TextError>{error}</TextError>}
         {isLoading && <Loader />}
         {Boolean(items.length) && (
-          <ButtonLoadMore type="button">Load more</ButtonLoadMore>
+          <ButtonLoadMore onClick={loadMore} type="button">
+            Load more
+          </ButtonLoadMore>
+        )}
+        {showModal && (
+          <Modal close={closeModal}>
+            <ImageGalleryItem {...imageDetails} />
+          </Modal>
         )}
       </>
     );
