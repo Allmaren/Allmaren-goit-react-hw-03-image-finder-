@@ -1,11 +1,12 @@
 import { Component } from 'react';
+
 import Loader from '../elements/Loader/Loader';
 import SearchBar from './Searchbar/Serchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
-
 import Modal from 'components/elements/Modal/Modal';
 import { SearchQuery } from '../elements/services/image-api';
+// import { ButtonUp } from 'components/elements/ButtonUp/ButtonUp';
 
 import { Block, TextError, ButtonLoadMore } from '../Gallery/Gallery.styled.js';
 import './index.css';
@@ -88,9 +89,12 @@ export class Gallery extends Component {
         {error && <TextError>{error}</TextError>}
         {isLoading && <Loader />}
         {Boolean(items.length) && (
-          <ButtonLoadMore onClick={loadMore} type="button">
-            Load more
-          </ButtonLoadMore>
+          <>
+            <ButtonLoadMore onClick={loadMore} type="button">
+              Load more
+            </ButtonLoadMore>
+            {/* <ButtonUp /> */}
+          </>
         )}
         {showModal && (
           <Modal close={closeModal}>

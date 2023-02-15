@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { GalleryBox } from './ImageGalleryItem.styled.js';
 
 const ImageGalleryItem = ({ largeImageURL, tags }) => {
@@ -9,3 +10,8 @@ const ImageGalleryItem = ({ largeImageURL, tags }) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  imageDetails: PropTypes.string,
+  tags: PropTypes.string,
+};
