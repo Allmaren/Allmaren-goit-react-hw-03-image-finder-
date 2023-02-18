@@ -9,6 +9,33 @@ export const SearchForm = styled.form`
   color: #0eba11;
 `;
 
+export const Input = styled.input`
+  padding: 15px;
+  border: none;
+  font-size: 20px;
+  margin-right: 20px;
+  width: 300px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: 2px 1px 5px rgb(52, 60, 62);
+  transition: box-shadow 250ms;
+  &:focus {
+    outline: 1px solid #2196f3;
+  }
+`;
+
+// export const ButtonLabel = styled.span`
+//   position: absolute;
+//   width: 1px;
+//   height: 1px;
+//   padding: 0;
+//   overflow: hidden;
+//   clip: rect(0, 0, 0, 0);
+//   white-space: nowrap;
+//   clip-path: inset(50%);
+//   border: 0;
+// `;
+
 export const ButtonForm = styled.button`
   display: inline-flex;
   padding: 15px 30px 15px 30px;
@@ -24,20 +51,5 @@ export const ButtonForm = styled.button`
   &:hover {
     scale: 1.02;
     background-color: #eadb10;
-  }
-`;
-
-export const Input = styled.input`
-  padding: 15px;
-  border: none;
-  font-size: 20px;
-  margin-right: 20px;
-  width: 300px;
-  border-radius: 10px;
-  outline: none;
-  box-shadow: 2px 1px 5px rgb(52, 60, 62);
-  transition: box-shadow 250ms;
-  &:focus {
-    outline: 1px solid #2196f3;
   }
 `;

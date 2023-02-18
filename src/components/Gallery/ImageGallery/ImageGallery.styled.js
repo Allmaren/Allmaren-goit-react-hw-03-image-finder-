@@ -15,13 +15,9 @@ export const PhotoCard = styled.li`
 `;
 
 export const GalleryImage = styled.img`
-  object-fit: cover;
-  flex-basis: calc((100% - 120px) / 4);
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  height: 320px;
-  width: 100%;
   border-radius: 10px;
+  width: 100%;
+  height: 260px;
   object-fit: cover;
   &hover,
   &:focus {
@@ -29,7 +25,7 @@ export const GalleryImage = styled.img`
   }
 `;
 
-export const GalleryBox = styled.div`
+export const GalleryBox = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;

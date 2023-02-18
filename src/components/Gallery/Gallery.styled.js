@@ -29,7 +29,8 @@ export const ButtonLoadMore = styled.button`
   background-color: rgba(57, 118, 246, 1);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
+  display: block;
+  margin: 15px auto;
   color: #eadb10;
   border: 0;
   text-decoration: none;

@@ -18,5 +18,5 @@ ImageGallery.defaultProps = {
 
 ImageGallery.propTypes = {
   items: PropTypes.array.isRequired,
-  showImage: PropTypes.func,
+  showImage: PropTypes.func.isRequired,
 };
