@@ -1,13 +1,21 @@
 import styled from 'styled-components';
 
 export const Block = styled.header`
-  width: 100%;
-  z-index: 1;
-  margin-bottom: 15px;
-  padding: 0;
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 64px;
+  padding-right: 24px;
+  padding-left: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  position: static;
+  margin-bottom: 15px;
   box-shadow: 1px 5px 10px rgb(52, 60, 62);
   background: linear-gradient(
     32deg,

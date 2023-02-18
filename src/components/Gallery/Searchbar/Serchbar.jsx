@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { SearchForm, Input } from './SeachBar.styled.js';
+// import { BiSearchAlt } from 'react-icons/bi';
 
 class SearchBar extends Component {
   state = {
@@ -35,7 +36,7 @@ class SearchBar extends Component {
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="🔍 Search images and photos"
           required
           name="search"
           value={search}
