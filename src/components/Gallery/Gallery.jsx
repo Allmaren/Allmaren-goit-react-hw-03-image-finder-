@@ -21,6 +21,7 @@ export class Gallery extends Component {
     // totalresult: 0,
     showModal: false,
     imageDetails: null,
+    showMore: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,9 +36,13 @@ export class Gallery extends Component {
       this.setState({ isLoading: true });
       const { search, page } = this.state;
       const data = await SearchQuery(search, page);
-      this.setState(({ items }) => ({
-        items: [...items, ...data.hits],
-      }));
+
+      this.setState(prevState => {
+        return {
+          items: [...prevState.items, ...data.hits],
+          showMore: prevState.page < Math.ceil(data.totalHits / 12),
+        };
+      });
     } catch (error) {
       this.setState({ error: error.message });
     } finally {
@@ -71,7 +76,8 @@ export class Gallery extends Component {
   };
 
   render() {
-    const { items, isLoading, error, imageDetails, showModal } = this.state;
+    const { items, isLoading, error, imageDetails, showModal, showMore } =
+      this.state;
     const { searchImage, loadMore, showImage, closeModal } = this;
 
     return (
@@ -81,20 +87,12 @@ export class Gallery extends Component {
         </Block>
 
         <ImageGallery items={items} showImage={showImage} />
-        {/* {!items.length && (
-          <TextError>
-            Image not found. Please change the query and try again
-          </TextError>
-        )} */}
         {error && <TextError>{error}</TextError>}
         {isLoading && <Loader />}
-        {Boolean(items.length) && (
-          <>
-            <ButtonLoadMore onClick={loadMore} type="button">
-              Load more
-            </ButtonLoadMore>
-            {/* <ButtonUp /> */}
-          </>
+        {showMore && (
+          <ButtonLoadMore onClick={loadMore} type="button">
+            Load more
+          </ButtonLoadMore>
         )}
         {showModal && (
           <Modal close={closeModal}>
